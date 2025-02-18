@@ -22,7 +22,7 @@ function createMap() {
 
     // Call data function
     getZones();
-    //info.addTo(map);
+    addLegend();
 }
 
 // Define the style for the Parking Zones
@@ -97,13 +97,33 @@ function getZones() {
         .catch(error => console.error('Error loading Parking data:', error));
 }
 
-/*//create legend
-var legend = L.Control({position: 'bottomleft'});
-legend.onAdd = function (map) {
-        
-    };*/
+// Create legend
+function addLegend() {
+    var legend = L.control({ position: 'bottomleft' });
 
+    legend.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'info legend');
+        var categories = {
+            'Zone A': '#F26221',
+            'Zone B': '#F68F58',
+            'Zone C': '#FABC95',
+            'Residential Zone': '#000000',
+            'Hourly (metered)': '#DCB326',
+            'ADA': '#005E8E'
+        };
 
+        div.innerHTML = '<strong>Parking Zones</strong><br>';
+        for (var category in categories) {
+            div.innerHTML += `<div style="display: flex; align-items: center; margin-bottom: 5px;">
+                                <i style="background:${categories[category]}; width: 20px; height: 20px; display: inline-block; margin-right: 5px;"></i>
+                                <span>${category}</span>
+                              </div>`;
+        }
+        return div;
+    };
+
+    legend.addTo(map);
+}
 
 // Initialize map
 document.addEventListener('DOMContentLoaded', createMap);
