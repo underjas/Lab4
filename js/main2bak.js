@@ -115,6 +115,7 @@ function createBlueClusterIcon(cluster) {
     });
 }
 
+
 // fetch ada point data
 function getADA() { 
     fetch("data/ADA_Parking.geojson")
@@ -147,6 +148,13 @@ function getADA() {
                 markers.addLayer(marker);
             });
 
+            // Create a base layer control to toggle the ADA Parking layer
+            var baseMaps = {
+                "ADA Parking": markers // Add ADA Parking layer to baseMaps
+            };
+
+            L.control.layers(null, baseMaps).addTo(map); // Add the control to the map
+
             // Optionally: restrict zoom beyond level 19
             map.setMaxZoom(19);
 
@@ -156,7 +164,7 @@ function getADA() {
                 onAdd: function(map) {
                     var container = L.DomUtil.create('div', 'leaflet-control-layers leaflet-bar');
                     container.innerHTML = `
-                        <label><input type="checkbox" id="adaCheckbox" />♿ ADA Parking</label>
+                        <label><input type="checkbox" id="adaCheckbox" checked /> ADA Parking</label>
                     `;
 
                     // Handle the checkbox change event to toggle the layer visibility
@@ -179,6 +187,7 @@ function getADA() {
             //L.DomUtil.addClass(container, 'always-visible');
         });      
 }
+
               
 // Create legend
 function addLegend() {
