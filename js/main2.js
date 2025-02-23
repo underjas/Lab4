@@ -43,7 +43,7 @@ function getColor(ZoneGroup) {
         'C': '#FABC95',
         'R': '#000000', 'RA': '#000000',
         'ShortTerm': '#DCB326',
-        'ADA': '#71B3FF',
+        'ADA': '#00A6ED',
         'NonPublic': '#feedde'
     };
     return colors[ZoneGroup] || '#ffffff00';
@@ -93,7 +93,16 @@ function getZones() {
         .then(data => {
             geojson = L.geoJSON(data, {
                 style: style,
-                onEachFeature: onEachFeature
+                onEachFeature: function (feature, layer) {
+                    onEachFeature(feature, layer);
+                    if (/^(A1|A2|A3|B1|B2|B3|C|R|RA)$/.test(feature.properties.ZoneGroup)) {
+                        layer.bindTooltip(feature.properties.ZoneGroup, {
+                            permanent: true,
+                            direction: 'center',
+                            className: 'zone-label'
+                    }).openTooltip();
+                }
+                }
             }).addTo(map);
         })
         .catch(error => console.error('Error loading Parking data:', error));
@@ -104,7 +113,7 @@ function createBlueClusterIcon(cluster) {
     var markersCount = cluster.getChildCount();
     var size = '15px';  // Size of the cluster icon
     var fontSize = '9px';  // Font size for the count text
-    var backgroundColor = '#71B3FF';  // Set the background color of the cluster
+    var backgroundColor = '#00A6ED';  // Set the background color of the cluster
 
     return new L.DivIcon({
         html: '<div style="background-color:' + backgroundColor + '; border-radius: 50%; color: white; width: ' + size + '; height: ' + size + '; line-height: ' + size + '; text-align: center; font-size: ' + fontSize + '">' + markersCount + '</div>',
@@ -190,9 +199,9 @@ function addLegend() {
             'Zone A': '#F26221',
             'Zone B': '#F68F58',
             'Zone C': '#FABC95',
-            'Residential Zone': '#000000',
+            'Residential': '#000000',
             'Hourly (metered)': '#DCB326',
-            'ADA': '#71B3FF',
+            'ADA': '#00A6ED',
             'Official Use Only': '#feedde'
         };
 

@@ -79,7 +79,16 @@ h4{color:#D73F09;
         box-shadow: none;
         padding: 0;
         text-align: center;
-        text-shadow:2px 2px 0 white, -2px -2px 0 white, 2px -2px 0 white, -2px 2px 0 white; 
+        text-shadow:
+            1px 1px 0 white,
+            -1px -1px 0 white, 
+            1px -1px 0 white, 
+            -1px 1px 0 white,
+            2px 2px 0 white,
+            -2px -2px 0 white, 
+            2px -2px 0 white, 
+            -2px 2px 0 white,
+            0 2px 2px white;
     }
 
     @font-face {
