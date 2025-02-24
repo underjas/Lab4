@@ -91,6 +91,16 @@ h4{color:#D73F09;
             0 2px 2px white;
     }
 
+    .leaflet-control-layers {
+        border: none !important;
+        box-shadow: none;
+    
+    }
+
+    #adaCheckbox {
+        outline: none !important;
+    }
+
     @font-face {
         font-family: 'Stratum2';
         src: url('fonts/Stratum2-Bold.otf') format('otf');

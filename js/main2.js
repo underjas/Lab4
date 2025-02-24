@@ -165,7 +165,7 @@ function getADA() {
                 onAdd: function(map) {
                     var container = L.DomUtil.create('div', 'leaflet-control-layers leaflet-bar');
                     container.innerHTML = `
-                        <label><input type="checkbox" id="adaCheckbox" />♿ ADA Parking</label>
+                        <label><input type="checkbox" id="adaCheckbox" />♿ ADA Parking &nbsp &nbsp;</label>
                     `;
 
                     // Handle the checkbox change event to toggle the layer visibility
